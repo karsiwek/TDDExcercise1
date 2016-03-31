@@ -18,10 +18,11 @@ public class BowlingGame {
     }
 
     public void shot(Integer result) {
-        players.get(currentPlayerId).setScore(result);
+        players.get(currentPlayerId).shot(result);
 
-        if(result==10){
+        if(players.get(currentPlayerId).isRoundFinished()){
             currentPlayerId = (currentPlayerId + 1) % players.size();
+            players.get(currentPlayerId).newRound();
         }
 
     }

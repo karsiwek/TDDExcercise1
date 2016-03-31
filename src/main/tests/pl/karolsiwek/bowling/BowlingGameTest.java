@@ -5,8 +5,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class BowlingGameTest {
 
@@ -140,53 +142,51 @@ public class BowlingGameTest {
     }
 //
 //    //does this test makes sense?
-//    @Test
-//    public void whoseTurn_shouldReturnFirstUser_afterFullTwoRounds() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        game.shot(10);
-//        game.shot(10);
-//        game.shot(2);
-//        game.shot(2);
-//        game.shot(2);
-//        game.shot(2);
-//
-//        //then
-//        assertEquals("user1", game.whoseTurn());
-//    }
+    @Test
+    public void whoseTurn_shouldReturnFirstUser_afterFullTwoRounds() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        game.shot(10);
+        game.shot(10);
+        game.shot(2);
+        game.shot(2);
+
+        //then
+        assertEquals("user2", game.whoseTurn());
+    }
 
 //
-//    //back to getScores!
-//    @Test
-//    public void getScores_shouldReturnSumOfScoriesOfOnePlayer_afterOneRound() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        game.shot(2);
-//        game.shot(2);
-//
-//        //then
-//        assertThat(game.getScores().get("user1"), is(4));
-//    }
+    //back to getScores!
+    @Test
+    public void getScores_shouldReturnSumOfScoriesOfOnePlayer_afterOneRound() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        game.shot(2);
+        game.shot(2);
+
+        //then
+        assertThat(game.getScores().get("user1"), is(4));
+    }
 //
 //    //that bowling!
-//    @Test
-//    public void getScores_shouldAddScoresFromSecondFrameToFirstOne_onStrike() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        game.shot(10);//one strikes
-//        game.shot(2);
-//        game.shot(3);
-//        game.shot(9);
-//
-//        //then
-//        assertThat(game.getScores().get("user1"), is(28));
-//    }
+    @Test
+    public void getScores_shouldAddScoresFromSecondFrameToFirstOne_onStrike() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        game.shot(10);//one strikes
+        game.shot(2);
+        game.shot(3);
+        game.shot(9);
+
+        //then
+        assertThat(game.getScores().get("user1"), is(28));
+    }
 //
 //    //TBH this is the first time I really learned what is the difference between strike and spare...
 //    @Test
@@ -222,7 +222,7 @@ public class BowlingGameTest {
 //
 //        //then
 //        assertThat(game.getScores().get("user1"), is(30));
-//        assertThat(game.getScores().get("user1"), is(0));
+//        assertThat(game.getScores().get("user2"), is(0));
 //    }
 //
 //
