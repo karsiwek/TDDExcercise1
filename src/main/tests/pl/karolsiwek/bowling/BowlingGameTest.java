@@ -2,6 +2,12 @@ package pl.karolsiwek.bowling;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
 public class BowlingGameTest {
 
     @Test(expected = IllegalArgumentException.class)
@@ -10,116 +16,128 @@ public class BowlingGameTest {
     }
 //
 //    //i know, easy and boring ;)
-//    @Test(expected = IllegalArgumentException.class)
-//    public void bowlingGame_shouldThrowException_onEmptyArrayOfUsers() {
-//        BowlingGame game = new BowlingGame(new ArrayList<String>());
-//    }
+    @Test(expected = IllegalArgumentException.class)
+    public void bowlingGame_shouldThrowException_onEmptyArrayOfUsers() {
+        BowlingGame game = new BowlingGame(new ArrayList<String>());
+    }
 
 //    //do we need to keep players names? naaah...
-//    @Test
-//    public void getScores_shouldReturnZeroForSingleUser_atTheBegginingOfTheGame() {
-//        //given
-//        BowlingGame game1 = new BowlingGame(Arrays.asList("onlyOneUser"));
+    @Test
+    public void getScores_shouldReturnZeroForSingleUser_atTheBegginingOfTheGame() {
+        //given
+        BowlingGame game1 = new BowlingGame(Arrays.asList("onlyOneUser"));
+
+        //when
+        //nothing
+
+        //then
+        assertArrayEquals(Arrays.asList(0).toArray(), game1.getScores().values().toArray());
+    }
 //
-//        //when
-//        //nothing
-//
-//        //then
-//        assertArrayEquals(Arrays.asList(0).toArray(), game1.getScores().values().toArray());
-//    }
-//
-//    @Test
-//    public void getScores_shouldReturnZeroForManyUsers_atTheBegginingOfTheGame() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2", "user3"));
-//
-//        //when
-//        //nothing
-//
-//        //then
-//        assertArrayEquals(Arrays.asList(0,0,0).toArray(), game.getScores().values().toArray());
-//    }
-//
+    @Test
+    public void getScores_shouldReturnZeroForManyUsers_atTheBegginingOfTheGame() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2", "user3"));
+
+        //when
+        //nothing
+
+        //then
+        assertArrayEquals(Arrays.asList(0,0,0).toArray(), game.getScores().values().toArray());
+    }
+
 //    //ok now we need player name...
-//    @Test
-//    public void getScores_shouldReturnRoundScore_afterOneRound() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1"));
-//
-//        //when
-//        game.shot(5);
-//
-//        //then
-//        assertEquals((Integer) 5, game.getScores().get("user1"));
-//    }
+    @Test
+    public void getScores_shouldReturnRoundScore_afterOneRound() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1"));
+
+        //when
+        game.shot(5);
+
+        //then
+        assertEquals((Integer) 5, game.getScores().get("user1"));
+    }
 //
 //    //another function!
-//    @Test
-//    public void whoseTurn_shouldReturnFirstUser_atTheBegginingOfTheGame() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        //nothing
-//
-//        //then
-//        assertEquals("user1", game.whoseTurn());
-//    }
-//
+    @Test
+    public void whoseTurn_shouldReturnFirstUser_atTheBegginingOfTheGame() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        //nothing
+
+        //then
+        assertEquals("user1", game.whoseTurn());
+    }
+
 //
 //    //funny emoticon for today: ಠ.ಠ
-//    @Test
-//    public void whoseTurn_shouldReturnSecondUser_afterFirstScoresStrike() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        game.shot(10);
-//
-//        //then
-//        assertEquals("user2", game.whoseTurn());
-//    }
+    @Test
+    public void whoseTurn_shouldReturnSecondUser_afterFirstScoresStrike() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        game.shot(10);
+
+        //then
+        assertEquals("user2", game.whoseTurn());
+    }
+
+    @Test
+    public void whoseTurn_shouldReturnSecondUser_afterFirstScoresStrike_differentNames() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("player1", "player2"));
+
+        //when
+        game.shot(10);
+
+        //then
+        assertEquals("player2", game.whoseTurn());
+    }
 //
 //    //no comment over here...
-//    @Test
-//    public void whoseTurn_shouldReturnFirstUser_afterEveryoneStrikes() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        game.shot(10);
-//        game.shot(10);
-//
-//        //then
-//        assertEquals("user1", game.whoseTurn());
-//    }
+    @Test
+    public void whoseTurn_shouldReturnFirstUser_afterEveryoneStrikes() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        game.shot(10);
+        game.shot(10);
+
+        //then
+        assertEquals("user1", game.whoseTurn());
+    }
 //
 //    //maybe keep players data in separate class?
-//    @Test
-//    public void whoseTurn_shouldReturnFirstUser_whenHeDidnStrike() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        game.shot(9);
-//
-//        //then
-//        assertEquals("user1", game.whoseTurn());
-//    }
+    @Test
+    public void whoseTurn_shouldReturnFirstUser_whenHeDidnStrike() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        game.shot(9);
+
+        //then
+        assertEquals("user1", game.whoseTurn());
+    }
 //
 //    //more logic...
-//    @Test
-//    public void whoseTurn_shouldReturnSecondUser_whenFirstOneDidTwoTries() {
-//        //given
-//        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
-//
-//        //when
-//        game.shot(2);
-//        game.shot(2);
-//
-//        //then
-//        assertEquals("user2", game.whoseTurn());
-//    }
+    @Test
+    public void whoseTurn_shouldReturnSecondUser_whenFirstOneDidTwoTries() {
+        //given
+        BowlingGame game = new BowlingGame(Arrays.asList("user1", "user2"));
+
+        //when
+        game.shot(2);
+        game.shot(2);
+
+        //then
+        assertEquals("user2", game.whoseTurn());
+    }
 //
 //    //does this test makes sense?
 //    @Test
